@@ -1,7 +1,7 @@
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
-        int row=matrix.size();
+          int row=matrix.size();
         int col=matrix[0].size();
         int srow=0;
         int erow=row-1;
@@ -30,7 +30,5 @@ public:
         }
 
         return ans;
-      
-
     }
 };
