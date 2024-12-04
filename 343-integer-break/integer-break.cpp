@@ -1,16 +1,16 @@
 class Solution {
 public:
     int integerBreak(int n) {
-        vector<int>dp(n+1,INT_MIN);
-        dp[0]=1;
-        dp[1]=1;
-        for(int i=2;i<=n;i++){
-            for(int k=1;k<i;k++){
-                dp[i]=max(dp[i],k*max(dp[i-k],i-k));
-
-            }
+        if(n==2)return 1;
+        if(n==3)return 2;
+        if(n==4)return 4;
+        int ans=1;
+        while(n>4){
+            ans*=3;
+            n-=3;
         }
-        return dp[n];
+        ans*=n;
+        return ans;
         
     }
 };
