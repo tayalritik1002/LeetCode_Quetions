@@ -1,20 +1,24 @@
 class Solution {
 public: 
-int solve(int n,int k,int target,vector<vector<int>> &vec){
-
-    if(n==0)return (target==0); //agar n==0 aur target ==0 only this condition return 1 else return 0;
-    if(target<0)return 0;
-    if(vec[n][target]!=-1)return vec[n][target];
-     int count=0;
-    for(int i=1;i<=k;i++){
-        count=(count+solve(n-1,k,target-i,vec))%1000000007;
+int solve(int n,int k,int target,vector<vector<int>> &dp){
+    dp[0][0]=1;
+    for(int i=1;i<=n;i++){
+        for(int j=1;j<=target;j++){
+            int count=0;
+            for(int l=1;l<=k;l++){
+                if(j-l>=0)
+                count=(count + dp[i-1][j-l])%1000000007;
+            }
+            dp[i][j]=count;
+        }
     }
-    return vec[n][target]=count;
+    return dp[n][target];
+
 
 
 }
     int numRollsToTarget(int n, int k, int target) {
-       vector<vector<int>> vec(n+1, vector<int>(target+1,-1));
+       vector<vector<int>> vec(n+1, vector<int>(target+1));
 
         return solve(n,k,target,vec);
         
