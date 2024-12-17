@@ -1,13 +1,23 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        int sum=0; int n=nums.size();
-        for(int i=0;i<n;i++){
-            sum+=nums[i];
-        }
-        int sum2=n*(n+1)/2;
+        bool flag=false; int i;
 
-        return sum2-sum;
-        
+
+        for( i=0;i<=nums.size();i++){
+            for(int j=0;j<nums.size();j++){
+               if(i==nums[j]){
+                flag=true;
+                break;
+               }
+               else flag=false;
+            }
+            if(!flag)break;
+            cout<<flag;
+        }
+        return i;
+    
     }
+        
+    
 };
