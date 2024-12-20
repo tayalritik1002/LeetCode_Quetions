@@ -1,21 +1,29 @@
 class Solution {
 public:
-    bool wordBreak(string s, vector<string>& wordDict) {
-        unordered_set<string>st(wordDict.begin(),wordDict.end());
-        int n=s.size();
+    bool solve(string &s, unordered_set<string> &st, int idx, vector<int> &dp, int n) {
+  
+        if (idx == n) return true;
 
-        vector<bool>dp(n+1,false);
-        dp[0]=true;
-        for(int i=1;i<=n;i++){
-            for(int j=0;j<i;j++){
-                if(dp[j]&&st.find(s.substr(j,i-j))!=st.end()){
-                    dp[i]=true;
-                    break;
-                }
+        // Return cached result if already computed.
+        if (dp[idx] != -1) return dp[idx];
+
+        // Try to split the string at every possible length from idx to n.
+        for (int l = 1; idx + l <= n; l++) {
+            string temp = s.substr(idx, l);
+            // If substring exists in the dictionary and the rest of the string can be split
+            if (st.find(temp) != st.end() && solve(s, st, idx + l, dp, n)) {
+                return dp[idx] = true;
             }
         }
-        return dp[n];
 
-        
+        // If no valid split is found, mark this index as false.
+        return dp[idx] = false;
+    }
+
+    bool wordBreak(string s, vector<string> &wordDict) {
+        unordered_set<string> st(wordDict.begin(), wordDict.end());
+        int n = s.length();
+        vector<int> dp(n, -1); // Use -1 for uncomputed states (instead of `false`).
+        return solve(s, st, 0, dp, n);
     }
 };
