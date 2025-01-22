@@ -11,15 +11,21 @@ long long solve(vector<int>& p, int mid){
     int minEatingSpeed(vector<int>& p, int h) {
         int s=1;
         int e=*max_element(p.begin(), p.end());
+        int ans;
 
         int mid;
         while(s<=e){
             mid=s+(e-s)/2;
             long long totalhours=solve(p,mid);
-             if(totalhours>h)s=mid+1;
-            else e=mid-1;
+             if(totalhours<=h){
+                ans=mid;
+                e=mid-1;
+             }
+            else {
+                s=mid+1;
+                }
         }
-        return s;
+        return ans;
         
     }
 };
