@@ -1,27 +1,25 @@
+#include<bits/stdc++.h>
 class Solution {
 public:
+int max(int a,int b){
+    if(a>b)return a;
+    else return b;
+}
     int longestConsecutive(vector<int>& nums) {
-
-        if(nums.empty())return 0;
         unordered_set<int>st;
+        for(auto i: nums)st.insert(i);
         int ans=0;
-        for(auto i:nums){
-            st.insert(i);
-        }
         for(auto i:st){
             if(st.find(i-1)==st.end()){
-                int c=1;
-                int increase_curr=i;
-                while(st.find(increase_curr+1)!=st.end()){
-                    c++;
-                    increase_curr++;
-                    
+                int count=1;
+                while(st.find(i+1)!=st.end()){
+                    count++;
+                    i++;
                 }
-                ans=max(ans,c);
+                 ans=max(ans,count);
             }
+           
         }
         return ans;
-        
-        
     }
 };
