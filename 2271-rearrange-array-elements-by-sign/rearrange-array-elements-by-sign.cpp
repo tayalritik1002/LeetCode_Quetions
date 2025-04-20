@@ -1,26 +1,18 @@
 class Solution {
 public:
     vector<int> rearrangeArray(vector<int>& nums) {
-
-        int pos=0;// at even index
-        int neg=1;// at odd index
-        vector<int>ans(nums.size());
-
-        // we iterate over each element if positiive then place at postive index which is even if elemnt is negative thern place it negative index which is odd
-
-
-        for(int a:nums){
-            if(a>0){
-                ans[pos]=a;
-                pos+=2;
+        vector<int>ans(nums.size()); int n=nums.size();
+        int i=0,j=1;
+        for(int k=0;k<n;k++){
+            if(nums[k]>=0){
+                ans[i]=nums[k];
+                i+=2;
             }
             else {
-                ans[neg]=a;
-                neg+=2;
+                ans[j]=nums[k];
+                j+=2;
             }
-            
         }
-        return ans;
-        
+        return ans;   
     }
 };
