@@ -6,6 +6,7 @@ public:
             if(mp.find(target-nums[i])!=mp.end()){
                 ans.push_back(i);
                 ans.push_back(mp[target-nums[i]]);
+                break;
             }
             mp[nums[i]]=i;
         }
